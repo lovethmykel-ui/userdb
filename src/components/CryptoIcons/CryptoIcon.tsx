@@ -38,7 +38,7 @@ export const CryptoIcon: React.FC<CryptoIconProps> = ({ sym, size = 26, classNam
 
   return (
     <img
-      src={`/cryptocurrency-icons/svg/color/${lowercaseSym}.svg`}
+      src={`/new-crypto-logos/SVG/${lowercaseSym}.svg`}
       alt={`${sym} icon`}
       width={size}
       height={size}
