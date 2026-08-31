@@ -1313,6 +1313,182 @@ tr:hover td {
 }
 
 /* ==========================================================================
+   BYBIT MOBILE DASHBOARD UI
+   ========================================================================== */
+.dash-header-mobile {
+  position: relative;
+  padding: 32px 16px 24px;
+  margin: -12px -16px 16px;
+  background: radial-gradient(circle at center 0%, rgba(139, 92, 246, 0.12), transparent 65%);
+  background-size: 100% 250px;
+  background-repeat: no-repeat;
+  border-bottom: 1px solid var(--border-soft);
+}
+.dash-header-mobile::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: repeating-linear-gradient(to right, var(--border-soft) 0, var(--border-soft) 1px, transparent 1px, transparent 24px);
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+}
+.dash-header-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.balance-massive {
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
+.balance-massive .cur {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-dim);
+  margin-left: 6px;
+}
+.btn-deposit-yellow {
+  background: #F3BA2F;
+  color: #000;
+  font-weight: 700;
+  padding: 10px 24px;
+  border-radius: 20px;
+  border: none;
+  font-size: 14px;
+  box-shadow: 0 4px 14px rgba(243, 186, 47, 0.3);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.btn-deposit-yellow:hover {
+  transform: scale(1.02);
+  background: #FFC940;
+}
+.quick-actions-circle {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 8px;
+  margin-bottom: 24px;
+}
+.qa-circle-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  flex: 1;
+}
+.qa-icon-wrap {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--surface-hover);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  border: 1px solid var(--border-soft);
+  transition: all 0.2s ease;
+}
+.qa-circle-btn:hover .qa-icon-wrap {
+  background: var(--border-soft);
+}
+.qa-label {
+  font-size: 12px;
+  color: var(--text);
+  font-weight: 500;
+}
+.markets-panel-mobile {
+  background: var(--bg-elevated);
+  border-radius: 24px 24px 0 0;
+  padding: 16px 16px 0;
+  margin: 0 -16px;
+  border-top: 1px solid var(--border);
+  min-height: 400px;
+}
+.markets-mobile-tabs {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+  -webkit-overflow-scrolling: touch;
+}
+.markets-mobile-tabs::-webkit-scrollbar {
+  display: none;
+}
+.market-m-tab {
+  color: var(--text-faint);
+  font-weight: 600;
+  font-size: 15px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding-bottom: 4px;
+}
+.market-m-tab.active {
+  color: var(--text);
+  font-size: 17px;
+}
+.market-m-subtabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.m-subtab {
+  background: var(--surface-hover);
+  color: var(--text-dim);
+  padding: 4px 14px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.m-subtab.active {
+  background: rgba(139, 92, 246, 0.15);
+  color: var(--brand-light);
+}
+.market-list-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid transparent;
+}
+.market-list-row:last-child {
+  border-bottom: none;
+}
+.market-list-col {
+  display: flex;
+  flex-direction: column;
+}
+.btn-price-pill {
+  border: none;
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  border-radius: 4px;
+  padding: 8px 12px;
+  min-width: 80px;
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+.btn-price-pill.up { background: #2FBD8E; }
+.btn-price-pill.down { background: #F1667A; }
+
+/* ==========================================================================
    MOBILE & TABLET RESPONSIVENESS
    ========================================================================== */
 
