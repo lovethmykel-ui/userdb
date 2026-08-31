@@ -10,7 +10,13 @@ import {
   ArrowUp, 
   UserCircle,
   Lightning,
-  Coins
+  Coins,
+  List,
+  X,
+  ChartLineUp,
+  Wallet,
+  Storefront,
+  ArrowRight
 } from '@phosphor-icons/react';
 import { CryptoIcon } from '@/components/CryptoIcons/CryptoIcon';
 
@@ -33,9 +39,12 @@ export const Navbar: React.FC<NavbarProps> = ({
   activeAlertCount = 0,
   unreadAlertCount = 0
 }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+
   const navigate = (v: string) => {
     if (onSelectView) onSelectView(v);
     else if (onNavigate) onNavigate(v);
+    setIsMobileMenuOpen(false); // Close menu on navigation
   };
 
   const alertCount = activeAlertCount || unreadAlertCount;
@@ -158,7 +167,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <GearSix size={16} />
           </button>
 
-          <div style={{ display: 'flex', gap: '8px', marginLeft: '6px' }}>
+          <div className="hidden-mobile" style={{ display: 'flex', gap: '8px', marginLeft: '6px' }}>
             <button 
               className="btn btn-ghost" 
               style={{ padding: '6px 12px', fontSize: '12px', display: 'flex', alignItems: 'center', gap: '4px' }}
@@ -176,7 +185,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           <div 
-            className="avatar-btn cursor-pointer" 
+            className="avatar-btn cursor-pointer hidden-mobile" 
             title="Account & Security"
             onClick={() => navigate('profile')}
             style={{ marginLeft: '6px' }}
@@ -185,8 +194,62 @@ export const Navbar: React.FC<NavbarProps> = ({
               JD
             </div>
           </div>
+
+          <button 
+            className="icon-btn hamburger-btn" 
+            title="Menu"
+            style={{ display: 'none' }} // Hidden by default, shown via CSS on tablet/mobile
+            onClick={() => setIsMobileMenuOpen(true)}
+          >
+            <List size={22} />
+          </button>
         </div>
       </nav>
+
+      {/* Slide-out Mobile Menu Drawer */}
+      <div 
+        className={`mobile-drawer-overlay ${isMobileMenuOpen ? 'open' : ''}`}
+        onClick={() => setIsMobileMenuOpen(false)}
+      />
+      <div className={`mobile-drawer ${isMobileMenuOpen ? 'open' : ''}`}>
+        <div className="drawer-header">
+          <div className="nav-logo">
+            <div className="logo-badge" style={{ background: 'linear-gradient(135deg, #8B5CF6, #6D28D9)', boxShadow: '0 0 14px rgba(139, 92, 246, 0.4)' }}>
+              <CryptoIcon sym="OKN" size={24} />
+            </div>
+            <span className="logo-text">
+              OK<span>NEXUS</span>
+            </span>
+          </div>
+          <button className="icon-btn" onClick={() => setIsMobileMenuOpen(false)}>
+            <X size={20} />
+          </button>
+        </div>
+        
+        <div className="drawer-content">
+          {mainNavItems.map((item) => (
+            <button
+              key={item.id}
+              className={`drawer-item ${activeView === item.id ? 'active' : ''}`}
+              onClick={() => navigate(item.id)}
+            >
+              <span>{item.label}</span>
+              {item.badge ? (
+                <span className="pill pill-brand" style={{ fontSize: '9px', padding: '1px 5px' }}>{item.badge}</span>
+              ) : (
+                <ArrowRight size={14} className="text-faint" />
+              )}
+            </button>
+          ))}
+          
+          <div style={{ padding: '20px 24px', marginTop: '20px', borderTop: '1px solid var(--border-soft)' }}>
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <button className="btn btn-primary" style={{ flex: 1 }} onClick={onOpenDepositModal}>Deposit</button>
+              <button className="btn btn-ghost" style={{ flex: 1 }} onClick={onOpenWithdrawModal}>Withdraw</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

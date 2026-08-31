@@ -1,6 +1,13 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { 
+  SquaresFour, 
+  ChartLineUp, 
+  ArrowsLeftRight, 
+  Wallet,
+  List
+} from '@phosphor-icons/react';
 import { Navbar } from '@/components/Navigation/Navbar';
 import { DashboardView } from '@/components/Views/DashboardView';
 import { MarketsView } from '@/components/Views/MarketsView';
@@ -281,6 +288,50 @@ export default function Home() {
         onClose={() => setIsWithdrawOpen(false)}
         onShowToast={showToast}
       />
+
+      {/* Mobile Bottom Navigation */}
+      <div className="mobile-bottom-nav">
+        <button 
+          className={`mobile-nav-item ${activeView === 'dashboard' ? 'active' : ''}`}
+          onClick={() => setActiveView('dashboard')}
+        >
+          <SquaresFour size={24} weight={activeView === 'dashboard' ? "fill" : "regular"} />
+          Home
+        </button>
+        <button 
+          className={`mobile-nav-item ${activeView === 'markets' ? 'active' : ''}`}
+          onClick={() => setActiveView('markets')}
+        >
+          <ChartLineUp size={24} weight={activeView === 'markets' ? "fill" : "regular"} />
+          Markets
+        </button>
+        <button 
+          className={`mobile-nav-item ${activeView === 'trade' ? 'active' : ''}`}
+          onClick={() => setActiveView('trade')}
+        >
+          <ArrowsLeftRight size={24} weight={activeView === 'trade' ? "bold" : "regular"} />
+          Trade
+        </button>
+        <button 
+          className={`mobile-nav-item ${activeView === 'wallet' ? 'active' : ''}`}
+          onClick={() => setActiveView('wallet')}
+        >
+          <Wallet size={24} weight={activeView === 'wallet' ? "fill" : "regular"} />
+          Assets
+        </button>
+        <button 
+          className="mobile-nav-item"
+          onClick={() => {
+            // We use a small hack here to trigger the mobile menu in the Navbar.
+            // Ideally, we'd lift the state, but we can simulate a click on the hamburger button.
+            const hamburger = document.querySelector('.hamburger-btn') as HTMLButtonElement;
+            if (hamburger) hamburger.click();
+          }}
+        >
+          <List size={24} />
+          Menu
+        </button>
+      </div>
 
       {/* Interactive Toast */}
       <div className={`toast ${isToastVisible ? 'show' : ''}`} id="toast">
